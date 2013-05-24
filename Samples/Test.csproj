@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BDE43CA4-10B2-4014-9B45-4F7947F9A7E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Example</AssemblyName>
+    <AssemblyName>Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

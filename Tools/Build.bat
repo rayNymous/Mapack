@@ -15,7 +15,7 @@ if exist obj rd /q /s obj
 copy ReadMe.htm ..\Build
 popd
 
-pushd ..\Example
+pushd ..\Samples
 if exist obj rd /q /s obj
-%FrameworkPath%\csc.exe /target:exe /out:..\Build\Example.exe *.cs %1 /r:..\Build\Mapack.dll
+%FrameworkPath%\csc.exe /target:exe /out:..\Build\Test.exe *.cs %1 /r:..\Build\Mapack.dll
 popd
