@@ -1,7 +1,4 @@
-Mapack Matrix Package
-=====================
-
-Mapack is a .NET class library for basic linear algebra computations. 
+**Mapack** is a .NET class library for basic linear algebra computations. 
 
 It supports the following matrix operations and properties:
 
@@ -10,4 +7,4 @@ It supports the following matrix operations and properties:
   * Cholesky, LU, QR decomposition and equation system solver  
   * Single Value Decomposition, Least Squares solver and Eigenproblem solver
 
-The algorithms were adapted from Lapack and the Java Matrix Package.
+The algorithms were adapted from LAPACK and the Java Matrix Package.
