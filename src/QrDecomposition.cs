@@ -1,8 +1,3 @@
-// ----------------------------------------------
-// .NET Mapack, September 2000
-// Adapted from Mapack for COM and Jama routines.
-// http://www.lutzroeder.com/dotnet
-// ----------------------------------------------
 namespace Mapack
 {
 	using System;
