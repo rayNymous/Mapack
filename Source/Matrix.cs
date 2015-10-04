@@ -78,10 +78,52 @@ namespace Mapack
                     throw new ArgumentException("Argument out of range.");
                 }
             }
-        }			
-	
-		/// <summary>Determines weather two instances are equal.</summary>
-		public override bool Equals(object obj)
+        }
+
+        /// <summary>
+        /// resize Matrix for bigger size
+        /// </summary>
+        /// <param name="newRows"> new rows count </param>
+        /// <param name="newColumns"> new cols count </param>
+        public void Resize(int newRows, int newColumns)
+        {
+            if (newRows < this.Rows || newColumns < this.columns)
+                throw new ArgumentException("Resize for smaller size not allowed. use Submatrix");
+
+            int addrows = newRows - this.rows;
+            int addcolumns = newColumns - this.columns;
+
+            if (addrows > 0)
+            {
+                for (int i = this.rows; i < newRows; i++)
+                {
+                    this.data.Add(new List<double>(columns));
+                    for (int j = 0; j < columns; j++)
+                    {
+                        this.data[i].Add(0);
+                    }
+                }
+            }
+            this.rows = newRows;
+
+            if (addcolumns > 0)
+            {
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = columns; j < newColumns; j++)
+                    {
+                        this.data[i].Add(0);
+                    }
+                }
+            }
+
+
+            this.columns = newColumns;
+        }
+
+
+        /// <summary>Determines weather two instances are equal.</summary>
+        public override bool Equals(object obj)
 		{
 			return Equals(this, (Matrix) obj);
 		}
