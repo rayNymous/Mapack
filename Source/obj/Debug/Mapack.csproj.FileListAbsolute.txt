@@ -1,0 +1,4 @@
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Build\Debug\Mapack.dll
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Build\Debug\Mapack.pdb
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Source\obj\Debug\Mapack.dll
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Source\obj\Debug\Mapack.pdb

@@ -1,6 +1,7 @@
 namespace Mapack
 {
 	using System;
+    using System.Collections.Generic;
 
 	/// <summary>Determines the eigenvalues and eigenvectors of a real square matrix.</summary>
 	/// <remarks>
@@ -908,7 +909,7 @@ namespace Mapack
 			get
 			{
 				Matrix X = new Matrix(n, n);
-				double[][] x = X.Array;
+                List<List<double>> x = X.Array;
 	
 				for (int i = 0; i < n; i++) 
 				{

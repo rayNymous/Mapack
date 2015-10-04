@@ -1,6 +1,7 @@
 namespace Mapack
 {
 	using System;
+    using System.Collections.Generic;
 
 	/// <summary>Cholesky Decomposition of a symmetric, positive definite matrix.</summary>
 	/// <remarks>
@@ -31,20 +32,20 @@ namespace Mapack
 
 			int dimension = value.Rows;
 			L = new Matrix(dimension, dimension);
-				
-			double[][] a = value.Array;
-			double[][] l = L.Array;
+
+            List<List<double>> a = value.Array;
+            List<List<double>> l = L.Array;
 
 			this.positiveDefinite = true;
 			this.symmetric = true;
 
 			for (int j = 0; j < dimension; j++) 
 			{
-				double[] Lrowj = l[j];
+				List<double> Lrowj = l[j];
 				double d = 0.0;
 				for (int k = 0; k < j; k++)
 				{
-					double[] Lrowk = l[k];
+					List<double>Lrowk = l[k];
 					double s = 0.0;
 					for (int i = 0; i < k; i++)
 					{
@@ -126,7 +127,7 @@ namespace Mapack
             int count = value.Columns;
 
 			Matrix B = (Matrix)value.Clone();
-			double[][] l = L.Array;
+            List<List<double>> l = L.Array;
 
 			// Solve L*Y = B;
 			for (int k = 0; k < dimension; k++)

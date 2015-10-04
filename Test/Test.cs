@@ -79,5 +79,6 @@
 			
 			Console.WriteLine("V * D = ");
 			Console.WriteLine(eigen.EigenvectorMatrix * eigen.DiagonalMatrix);
+        Console.ReadKey();
 		}
 	}

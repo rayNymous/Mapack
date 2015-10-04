@@ -1,0 +1,6 @@
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Build\Debug\Test.exe
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Build\Debug\Test.pdb
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Test\obj\x86\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Test\obj\x86\Debug\Test.exe
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Test\obj\x86\Debug\Test.pdb
+C:\Users\oto\Documents\Visual Studio 2015\Projects\Mapack\Build\Debug\Test.exe.config

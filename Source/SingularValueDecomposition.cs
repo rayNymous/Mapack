@@ -1,6 +1,7 @@
 namespace Mapack
 {
 	using System;
+    using System.Collections.Generic;
 
 	/// <summary>Singular Value Decomposition for a rectangular matrix.</summary>
 	/// <remarks>
@@ -30,15 +31,15 @@ namespace Mapack
 			}
 
 			Matrix copy = (Matrix) value.Clone();
-			double[][] a = copy.Array;
+			List<List<double>> a = copy.Array;
 			m = value.Rows;
 			n = value.Columns;
 			int nu = Math.Min(m,n);
 			s = new double [Math.Min(m+1,n)];
 			U = new Matrix(m, nu);
 			V = new Matrix(n, n);
-			double[][] u = U.Array;
-			double[][] v = V.Array;
+			List<List<double>> u = U.Array;
+			List<List<double>> v = V.Array;
 			double[] e = new double [n];
 			double[] work = new double [m];
 			bool wantu = true;

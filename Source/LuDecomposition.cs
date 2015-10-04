@@ -1,6 +1,7 @@
 namespace Mapack
 {
 	using System;
+    using System.Collections.Generic;
 
 	/// <summary>LU decomposition of a rectangular matrix.</summary>
 	/// <remarks>
@@ -28,7 +29,7 @@ namespace Mapack
 			}
 			
 			this.LU = (Matrix) value.Clone();
-			double[][] lu = LU.Array;
+            List<List<double>> lu = LU.Array;
 			int rows = value.Rows;
 			int columns = value.Columns;
 			pivotVector = new int[rows];
@@ -38,8 +39,8 @@ namespace Mapack
 			}
 
 			pivotSign = 1;
-			double[] LUrowi;
-			double[] LUcolj = new double[rows];
+			List<double> LUrowi;
+            List<double> LUcolj = new List<double>(rows);//[rows];
 	
 			// Outer loop.
 			for (int j = 0; j < columns; j++)
@@ -47,6 +48,7 @@ namespace Mapack
 				// Make a copy of the j-th column to localize references.
 				for (int i = 0; i < rows; i++)
 				{
+                    LUcolj.Add(0);
 					LUcolj[i] = lu[i][j];
 				}
 	
@@ -209,7 +211,7 @@ namespace Mapack
 	
 			int rows = LU.Rows;
 			int columns = LU.Columns;
-			double[][] lu = LU.Array;
+            List<List<double>> lu = LU.Array;
 	
 			// Solve L*Y = B(piv,:)
 			for (int k = 0; k < columns; k++)

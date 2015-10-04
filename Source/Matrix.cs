@@ -3,12 +3,13 @@ namespace Mapack
 	using System;
 	using System.IO;
 	using System.Globalization;
+    using System.Collections.Generic;
 
 	/// <summary>Matrix provides the fundamental operations of numerical linear algebra.</summary>
 	public class Matrix
 	{
-		private double[][] data;
-		private int rows;
+		private List<List<double>> data;
+        private int rows;
 		private int columns;
 
 		private static Random random = new Random();
@@ -18,14 +19,18 @@ namespace Mapack
 		/// <param name="columns">Number of columns.</param>
 		public Matrix(int rows, int columns)
 		{
-			this.rows = rows;
-			this.columns = columns;
-			this.data = new double[rows][];
-			for (int i = 0; i < rows; i++)
-			{
-				this.data[i] = new double[columns];
-			}
-		}
+            this.rows = rows;
+            this.columns = columns;
+            this.data = new List<List<double>>(rows);
+            for (int i = 0; i < rows; i++)
+            {
+                this.data.Add(new List<double>(columns));// new double[columns];
+                for (int j = 0; j < columns; j++)
+                {
+                    this.data[i].Add(0);
+                }
+            }
+        }
 	
 		/// <summary>Constructs a matrix of the given size and assigns a given value to all diagonal elements.</summary>
 		/// <param name="rows">Number of rows.</param>
@@ -33,39 +38,47 @@ namespace Mapack
 		/// <param name="value">Value to assign to the diagnoal elements.</param>
 		public Matrix(int rows, int columns, double value)
 		{
-			this.rows = rows;
-			this.columns = columns;
-			this.data = new double[rows][];
+            this.rows = rows;
+            this.columns = columns;
+            this.data = new List<List<double>>(rows);
+            for (int i = 0; i < rows; i++)
+            {
+                this.data[i] = new List<double>(columns);
+            }
 
-			for (int i = 0; i < rows; i++)
-			{
-				data[i] = new double[columns];
-			}
-
-			for (int i = 0; i < rows; i++)
-			{
-				data[i][i] = value;
-			}
-		}
+            for (int i = 0; i < rows; i++)
+            {
+                data[i][i] = value;
+            }
+        }
 	
 		/// <summary>Constructs a matrix from the given array.</summary>
 		/// <param name="value">The array the matrix gets constructed from.</param>
 		[CLSCompliant(false)]
 		public Matrix(double[][] value)
 		{
-			this.rows = value.Length;
-			this.columns = value[0].Length;
-	
-			for (int i = 0; i < rows; i++)
-			{
-				if (value[i].Length != columns)
-				{
-					throw new ArgumentException("Argument out of range."); 
-				}
-			}
-	
-			this.data = value;
-		}			
+            this.rows = value.Length;
+            this.columns = value[0].Length;
+
+            this.data = new List<List<double>>(rows);
+            for (int i = 0; i < rows; i++)
+            {
+                this.data[i] = new List<double>(columns);// new double[columns];
+
+                for (int j = 0; j < columns; j++)
+                {
+                    this.data[i][j] = value[i][j];
+                }
+            }
+
+            for (int i = 0; i < rows; i++)
+            {
+                if (value[i].Length != columns)
+                {
+                    throw new ArgumentException("Argument out of range.");
+                }
+            }
+        }			
 	
 		/// <summary>Determines weather two instances are equal.</summary>
 		public override bool Equals(object obj)
@@ -111,7 +124,7 @@ namespace Mapack
 			return (this.Rows + this.Columns);
 		}
 
-		internal double[][] Array
+		internal List<List<double>> Array
 		{
 			get 
 			{ 
@@ -198,7 +211,7 @@ namespace Mapack
 			} 
 			
 			Matrix X = new Matrix(endRow - startRow + 1, endColumn - startColumn + 1);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = startRow; i <= endRow; i++)
 			{
 				for (int j = startColumn; j <= endColumn; j++)
@@ -216,7 +229,7 @@ namespace Mapack
 		public Matrix Submatrix(int[] rowIndexes, int[] columnIndexes)
 		{
 			Matrix X = new Matrix(rowIndexes.Length, columnIndexes.Length);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = 0; i < rowIndexes.Length; i++)
 			{
 				for (int j = 0; j < columnIndexes.Length; j++)
@@ -245,7 +258,7 @@ namespace Mapack
 			} 
 			
 			Matrix X = new Matrix(i1 - i0 + 1, c.Length);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = i0; i <= i1; i++)
 			{
 				for (int j = 0; j < c.Length; j++)
@@ -274,7 +287,7 @@ namespace Mapack
 			} 
 			
 			Matrix X = new Matrix(r.Length, j1-j0+1);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = 0; i < r.Length; i++)
 			{
 				for (int j = j0; j <= j1; j++) 
@@ -295,7 +308,7 @@ namespace Mapack
 		public Matrix Clone()
 		{
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)
@@ -311,7 +324,7 @@ namespace Mapack
 		public Matrix Transpose()
 		{
 			Matrix X = new Matrix(columns, rows);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)
@@ -391,10 +404,10 @@ namespace Mapack
 
 			int rows = value.Rows;
 			int columns = value.Columns;
-			double[][] data = value.Array;
+			List<List<double>> data = value.Array;
 
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)
@@ -444,7 +457,7 @@ namespace Mapack
 
 			int rows = left.Rows;
 			int columns = left.Columns;
-			double[][] data = left.Array;
+			List<List<double>> data = left.Array;
 
 			if ((rows != right.Rows) || (columns != right.Columns))
 			{
@@ -452,7 +465,7 @@ namespace Mapack
 			}
 
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)
@@ -494,7 +507,7 @@ namespace Mapack
 
 			int rows = left.Rows;
 			int columns = left.Columns;
-			double[][] data = left.Array;
+			List<List<double>> data = left.Array;
 
 			if ((rows != right.Rows) || (columns != right.Columns))
 			{
@@ -502,7 +515,7 @@ namespace Mapack
 			}
 
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+			List<List<double>> x = X.Array;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)
@@ -539,11 +552,11 @@ namespace Mapack
 
 			int rows = left.Rows;
 			int columns = left.Columns;
-			double[][] data = left.Array;
+			List<List<double>> data = left.Array;
 
 			Matrix X = new Matrix(rows, columns);
 
-			double[][] x = X.Array;
+            List<List<double>> x = X.Array;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)
@@ -580,7 +593,7 @@ namespace Mapack
 			}
 
 			int rows = left.Rows;
-			double[][] data = left.Array;
+            List<List<double>> data = left.Array;
 
 			if (right.Rows != left.columns)
 			{
@@ -589,7 +602,7 @@ namespace Mapack
 
 			int columns = right.Columns;
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+            List<List<double>> x = X.Array;
 
 			int size = left.columns;
 			double[] column = new double[size];
@@ -601,7 +614,7 @@ namespace Mapack
 				}
 				for (int i = 0; i < rows; i++)
 				{
-					double[] row = data[i];
+					List<double> row = data[i];
 					double s = 0;
 					for (int k = 0; k < size; k++)
 					{
@@ -673,7 +686,7 @@ namespace Mapack
 		public static Matrix Random(int rows, int columns)
 		{
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+            List<List<double>> x = X.Array;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)
@@ -688,7 +701,7 @@ namespace Mapack
 		public static Matrix Diagonal(int rows, int columns, double value)
 		{
 			Matrix X = new Matrix(rows, columns);
-			double[][] x = X.Array;
+            List<List<double>> x = X.Array;
 			for (int i = 0; i < rows; i++)
 			{
 				for (int j = 0; j < columns; j++)

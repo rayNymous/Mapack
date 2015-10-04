@@ -1,6 +1,7 @@
 namespace Mapack
 {
 	using System;
+    using System.Collections.Generic;
 
 	/// <summary>QR decomposition for a rectangular matrix.</summary>
 	/// <remarks>
@@ -27,7 +28,7 @@ namespace Mapack
 			}
 
 			this.QR = (Matrix) value.Clone();
-			double[][] qr = this.QR.Array;
+			List<List<double>> qr = this.QR.Array;
 			int m = value.Rows;
 			int n = value.Columns;
 			this.Rdiag = new double[n];
@@ -106,7 +107,7 @@ namespace Mapack
 			Matrix X = value.Clone();
 			int m = QR.Rows;
 			int n = QR.Columns;
-			double[][] qr = QR.Array;
+			List<List<double>> qr = QR.Array;
 			
 			// Compute Y = transpose(Q)*B
 			for (int k = 0; k < n; k++) 
@@ -175,8 +176,8 @@ namespace Mapack
 			{
 				int n = this.QR.Columns;
 				Matrix X = new Matrix(n, n);
-				double[][] x = X.Array;
-				double[][] qr = QR.Array;
+				List<List<double>> x = X.Array;
+				List<List<double>> qr = QR.Array;
 				for (int i = 0; i < n; i++) 
 				{
 					for (int j = 0; j < n; j++) 
@@ -206,8 +207,8 @@ namespace Mapack
 			get
 			{
 				Matrix X = new Matrix(QR.Rows, QR.Columns);
-				double[][] x = X.Array;
-				double[][] qr = QR.Array;
+				List<List<double>> x = X.Array;
+				List<List<double>> qr = QR.Array;
 				for (int k = QR.Columns - 1; k >= 0; k--) 
 				{
 					for (int i = 0; i < QR.Rows; i++)

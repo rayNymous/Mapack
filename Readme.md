@@ -1,4 +1,6 @@
-**Mapack** is a .NET class library for basic linear algebra computations. 
+Linear Algebra library for unity 3D .NET version 3.5 client profile.
+
+fork of **Mapack**
 
 It supports the following matrix operations and properties:
 
