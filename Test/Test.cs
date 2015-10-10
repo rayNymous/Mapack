@@ -86,10 +86,21 @@ class Example
 
         Console.WriteLine("V = ");
         Console.WriteLine(V.ToString());
-        V.Resize(4, 4);
+        V.Extend(4, 2);
 
-        Console.WriteLine("V.Resize(4,4) = ");
+        Console.WriteLine("V.Extend(4,4) = ");
         Console.WriteLine(V.ToString());
+
+        Matrix Z = new Matrix(3, 2);
+        Z[0, 0] = 2.0; Z[0, 1] = 1.0;
+        Z[1, 0] = 1.0; Z[1, 1] = 4.0;
+        Z[2, 0] = 1.0; Z[2, 1] = 3.0;
+
+        Console.WriteLine("Z = ");
+        Console.WriteLine(Z.ToString());
+
+        Console.WriteLine("Z.Transpose() = ");
+        Console.WriteLine(Z.Transpose().ToString());
 
         Console.ReadKey();
 	}

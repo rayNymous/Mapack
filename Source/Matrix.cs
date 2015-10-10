@@ -85,10 +85,10 @@ namespace Mapack
         /// </summary>
         /// <param name="newRows"> new rows count </param>
         /// <param name="newColumns"> new cols count </param>
-        public void Resize(int newRows, int newColumns)
+        public void Extend(int newRows, int newColumns)
         {
             if (newRows < this.Rows || newColumns < this.columns)
-                throw new ArgumentException("Resize for smaller size not allowed. use Submatrix");
+                throw new ArgumentException("Extend for smaller size not allowed. use Submatrix");
 
             int addrows = newRows - this.rows;
             int addcolumns = newColumns - this.columns;
@@ -166,7 +166,7 @@ namespace Mapack
 			return (this.Rows + this.Columns);
 		}
 
-		internal List<List<double>> Array
+		public List<List<double>> Array //internal
 		{
 			get 
 			{ 
@@ -637,9 +637,9 @@ namespace Mapack
 			int rows = left.Rows;
             List<List<double>> data = left.Array;
 
-			if (right.Rows != left.columns)
+			if (right.Rows != left.Columns)
 			{
-				throw new ArgumentException("Matrix dimensions are not valid.");
+				throw new ArgumentException("Matrix. Matrix dimensions are not valid. lc: " +left.Columns +"rr: "+right.Rows);
 			}
 
 			int columns = right.Columns;
