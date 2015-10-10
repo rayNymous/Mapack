@@ -109,8 +109,8 @@ namespace Mapack
 
 			if (value.Rows != L.Rows)
 			{
-				throw new ArgumentException("Matrix dimensions do not match.");
-			}
+                throw new ArgumentException("Solve. Matrix dimensions are not valid. lr: " + value.Rows + "sr: " + L.Rows);
+            }
 
 			if (!this.symmetric)
 			{
